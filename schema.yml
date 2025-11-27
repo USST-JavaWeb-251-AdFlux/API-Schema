@@ -1,0 +1,64 @@
+openapi: 3.1.1
+info:
+  title: AdFlux API Schema
+  version: '1.0'
+tags:
+  - name: auth
+    description: 用户认证
+paths:
+  /auth/register:
+    post:
+      tags: ['auth']
+      summary: 注册账号
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: 'BobLiu'
+                email:
+                  type: string
+                  example: 'bobliu@bobliu.tech'
+                phone:
+                  type: string
+                  example: '13566668888'
+                password:
+                  type: string
+                  example: 'Pa33w0rd'
+                role:
+                  type: string
+                  enum: ['admin', 'advertiser', 'publisher']
+                  example: 'advertiser'
+              required: ['username', 'phone', 'password', 'role']
+      responses:
+        '201':
+          description: 注册成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: ['success']
+                  message:
+                    type: string
+                    example: '注册成功'
+                required: ['status', 'message']
+        '400':
+          description: 注册失败
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: ['error']
+                  message:
+                    type: string
+                    example: '用户名已被占用'
+                required: ['status', 'message']
