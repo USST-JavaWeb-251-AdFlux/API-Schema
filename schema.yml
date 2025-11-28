@@ -47,7 +47,10 @@ paths:
                   message:
                     type: string
                     example: '注册成功'
-                required: ['status', 'message']
+                  token:
+                    type: string
+                    example: 'ed494c8798e7b51c86b335c39ceac226'
+                required: ['status', 'message', 'token']
         '400':
           description: 注册失败
           content:
